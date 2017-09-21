@@ -1,0 +1,52 @@
+{
+  "name": "top20updater",
+  "version": "0.1.0",
+  "description": "Top20updater",
+  "private": true,
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "start": "npm run tsc && node ./lib/index.js",
+    "test": "npm run tsc && mocha -t 5000",
+    "tsc": "tsc",
+    "tscw": "tsc -w",
+    "preversion": "npm run tsc",
+    "postversion": "git push --follow-tags",
+    "prepublish": "npm run tsc"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ournet/top20updater.git"
+  },
+  "keywords": [
+    "top20",
+    "top20-md",
+    "updater"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ournet/top20updater.git/issues"
+  },
+  "homepage": "https://github.com/Ournet/top20updater.git#readme",
+  "devDependencies": {
+    "@types/cheerio": "^0.22.2",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.x.x",
+    "@types/node-fetch": "^1.6.7",
+    "debug": "^2.6.3",
+    "mocha": "^3.5.3",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^4.0.0",
+    "node-fetch": "^1.7.3",
+    "ournet.logger": "^0.1.0",
+    "top20rating": "^0.1.0",
+    "top20websites": "^0.3.0"
+  }
+}
