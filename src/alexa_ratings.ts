@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 export async function getRatings(host: string): Promise<Ratings> {
     host = host.replace(/^www\./, '');
 
-    const body = await fetch(`https://www.alexa.com/siteinfo/${host}`, { timeout: 1000 * 5 }).then(response => response.text());
+    const body = await fetch(`https://www.alexa.com/siteinfo/${host}`, { timeout: 1000 * 5, redirect: 'error' }).then(response => response.text());
 
     const $ = cheerio.load(body);
 
