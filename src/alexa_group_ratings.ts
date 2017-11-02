@@ -23,6 +23,7 @@ export function getRatings(hosts: string[]): Promise<Ratings[]> {
             if (err) {
                 return reject(err);
             }
+            console.log('data', data);
             // res.length === 5 
             // data is an array with a response object for each domain 
             // data.forEach(function (item) {

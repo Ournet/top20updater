@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-import { getRatings as getAlexaRatingsGroup } from './alexa_group_ratings';
+// import { getRatings as getAlexaRatingsGroup } from './alexa_group_ratings';
 import { Ratings } from './types';
 import { getRatings as getAlexaRatings } from './alexa_ratings';
 import { getRatings as getYandexRatings } from './yandex_ratings';
@@ -16,7 +16,10 @@ function start() {
     function next() {
         return enumerator.next().then(sites => {
             if (sites.length) {
-                return eachSeries(sites, site => getRatings(site.host).then(ratings => setRatings(site, ratings)).then(() => delay(6000))).then(next);
+                return eachSeries(sites, site => getRatings(site.host)
+                    .then(ratings => setRatings(site, ratings))
+                    .then(() => delay(6000)))
+                    .then(next);
             }
         });
     }
@@ -33,9 +36,10 @@ function catchError(e: Error) {
 
 function getRatings(host: string): Promise<Ratings> {
     logger.info('getting ratings for ' + host);
-    return Promise.all([getAlexaRatings(host).catch(catchError), getYandexRatings(host).catch(catchError)]).then(results => {
-        return <Ratings>Object.assign.apply(Object, results);
-    });
+    return Promise.all([getAlexaRatings(host).catch(catchError), getYandexRatings(host).catch(catchError)])
+        .then(results => {
+            return <Ratings>Object.assign.apply(Object, results);
+        });
 }
 
 export function eachSeries<T>(arr: any[], iteratorFn: (item: any) => Promise<T>) {
