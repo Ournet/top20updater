@@ -1,6 +1,7 @@
 
 require('dotenv').config();
 
+import { getRatings as getAlexaRatingsGroup } from './alexa_group_ratings';
 import { Ratings } from './types';
 import { getRatings as getAlexaRatings } from './alexa_ratings';
 import { getRatings as getYandexRatings } from './yandex_ratings';
@@ -42,5 +43,5 @@ export function eachSeries<T>(arr: any[], iteratorFn: (item: any) => Promise<T>)
 }
 
 function delay<T>(millis: number, value?: T): Promise<T> {
-    return new Promise((resolve) => setTimeout(resolve(value), millis))
+    return new Promise((resolve) => setTimeout(() => resolve(value), millis));
 }
